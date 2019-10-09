@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gaas-api
+  namespace: gaas
+spec:
+  selector:
+    matchLabels:
+      app: gaas-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gaas-api
+    spec:
+      containers:
+      - name: gaas-api
+        image: registry.npf.dk/gaas-api
+        imagePullPolicy: Always
+        #command: ["/bin/sleep","9999"]
+        command: ["flask","run","--host","0.0.0.0","--port","80"]
+        ports:
+        - containerPort: 80
+        env: 
+        - name: FLASK_APP
+          value: "main.py"
+      serviceAccountName: gaas-api-account
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gaas-api
+  namespace: gaas
+spec:
+  selector:
+    app: gaas-api
+  type: ClusterIP
+  clusterIP: 10.96.10.10
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

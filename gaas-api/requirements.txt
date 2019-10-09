@@ -1,0 +1,6 @@
+Flask
+kubernetes
+flask_json
+flask_cors
+ujson
+humanfriendly

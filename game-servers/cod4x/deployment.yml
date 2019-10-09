@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: gaas
+  namespace: gaas
+  name: cod4
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gaas
+    spec:
+      containers:
+      - image: registry.npf.dk/gaas-cod4
+        imagePullPolicy: IfNotPresent
+        name: cod4
+        resources:
+          limits:
+            cpu: "4"
+            memory: 32G
+          requests:
+            cpu: "2"
+            memory: 16G
