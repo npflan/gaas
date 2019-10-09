@@ -106,7 +106,7 @@ def delete():
 def add_servers():
 
     if count_servers():
-        return "You can't have more than 2 servers", 403
+        return "You can't have more than 3 servers", 403
     game_id = request.json['game_id']
     params = request.json['parms']
     u_ip = request.remote_addr

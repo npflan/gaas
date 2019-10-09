@@ -20,7 +20,6 @@ class TeeWorldsGameSpec(GameSpec):
         id="SERVER_NAME",
         type=ParamTypes.STRING,
         name="Server Name",
-        optional=True,
         description="The game server name ",
     ),Param(
         id="MAP",
@@ -32,8 +31,8 @@ class TeeWorldsGameSpec(GameSpec):
 
     def get_param_constraints(self):
         return {
-            "RCON_PASSWORD": [(lambda v: len(v) > 10, "RCON Password must be at least 10 characters.")],
-            "SERVER_NAME": [(lambda v: len(v) > 4, "RCON Password must be at least 4 characters.")],
+            "RCON_PASSWORD": [(lambda v: len(v) > 11, "RCON Password must be at least 10 characters.")],
+            "SERVER_NAME": [(lambda v: len(v) > 5, "Server name must be at least 4 chars.")],
             "MAP": [],
         }
 

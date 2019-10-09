@@ -1,5 +1,4 @@
 FROM steamcmd
-USER steam
 WORKDIR /steam/steamcmd_linux
 RUN mkdir -p /steam/csgo \
   && ./steamcmd.sh +login anonymous +force_install_dir ../csgo +app_update 740 +quit

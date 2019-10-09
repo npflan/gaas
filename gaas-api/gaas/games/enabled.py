@@ -12,8 +12,8 @@ ENABLED_GAMES={
     #CSSGameSpec.id: CSSGameSpec(),
     CSGoGameSpec.id: CSGoGameSpec(),
     FactorioGameSpec.id: FactorioGameSpec(),
-    Cod4xGameSpec.id: Cod4xGameSpec(),
-    Cod4mw2GameSpec.id: Cod4mw2GameSpec(),
+    #Cod4xGameSpec.id: Cod4xGameSpec(),
+    #Cod4mw2GameSpec.id: Cod4mw2GameSpec(),
     TeeWorldsGameSpec.id: TeeWorldsGameSpec()
 }
 

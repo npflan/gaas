@@ -26,9 +26,8 @@ class Cod4xGameSpec(GameSpec):
 
     def get_param_constraints(self):
         return {
-            "SV_PASSWORD": [],
             "RCON_PASSWORD": [(lambda v: len(v) > 10, "RCON Password must be at least 10 characters.")],
-            "MAP": []
+            "GAME_TYPE": []
         }
 
     def make_deployment(self, params):

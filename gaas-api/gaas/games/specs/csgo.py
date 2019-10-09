@@ -26,12 +26,12 @@ class CSGoGameSpec(GameSpec):
         type=ParamTypes.ARRAY,
         name="Map",
         description="Map the server will start on",
-        elements=["de_vertigo","de_train","de_overpass","de_nuke","de_mirage","de_inferno","de_cache","de_dust"]
+        elements=["de_vertigo","de_train","de_overpass","de_nuke","de_mirage","de_inferno","de_cache","de_dust2"]
     )]
 
     def get_param_constraints(self):
         return {
-            "SV_PASSWORD": [],
+            "SV_PASSWORD": [(lambda v: len(v) > 5, "Password must be at least 4 characters.")],
             "RCON_PASSWORD": [(lambda v: len(v) > 10, "RCON Password must be at least 10 characters.")],
             "MAP": []
         }
@@ -46,7 +46,7 @@ class CSGoGameSpec(GameSpec):
         )])
         return [client.V1Container(
             env=env,
-            image= "registry.npf.dk/gaas-csgo",
+            image= "registry.npf.dk/gaas-csgo:1570633345",
             name="csgo",
             resources=client.V1ResourceRequirements(
                 limits={
