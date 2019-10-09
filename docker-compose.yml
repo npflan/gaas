@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+  api:
+    container_name: api
+    hostname: api
+    image: python:3
+    restart: always
+    environment:
+      FLASK_APP: "main.py"
+    working_dir: /usr/src/app
+    command: |
+      bash -c "pip install --no-cache-dir -r ./requirements.txt && python -m flask run -h 0.0.0.0"
+    environment:
+      FLASK_APP: "main.py"
+      FLASK_DEBUG: "1"
+    ports:
+      - '8081:5000'
+    expose:
+      - '5000'
+    networks:
+      default:
+        aliases:
+          - api
+    volumes:
+      - type: bind
+        source: ./gaas-api
+        target: /usr/src/app/
+      - type: bind
+        source: "${KUBECONFIG_DIRECTORY}"
+        target: /root/.kube/
+  portal:
+    container_name: portal
+    image: nginx:alpine
+    depends_on:
+      - api
+    ports:
+      - '8080:80'
+    volumes:
+      - type: bind
+        source: ./gaas-portal/nginx
+        target: /etc/nginx/conf.d/
+      - type: bind
+        source: ./gaas-portal/static
+        target: /usr/share/nginx/html/
